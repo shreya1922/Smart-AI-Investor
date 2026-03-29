@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart AI Investor</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+
+    <h1>📈 Smart AI Investor</h1>
+
+    <input type="text" id="stock" placeholder="Enter Stock Symbol (e.g. TCS)">
+    <br><br>
+
+    <button onclick="getStock()">Check Stock</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        async function getStock() {
+            let symbol = document.getElementById("stock").value;
+
+            let response = await fetch(`http://127.0.0.1:5000/stock?symbol=${symbol}`);
+            let data = await response.json();
+
+            if (data.error) {
+                document.getElementById("result").innerText = data.error;
+            } else {
+                document.getElementById("result").innerText =
+                    "Stock: " + data.symbol +
+                    "\nPrice: ₹" + data.price +
+                    "\nSuggestion: " + data.suggestion;
+            }
+        }
+    </script>
+
+</body>
+</html>

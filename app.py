@@ -1,35 +1,40 @@
 from flask import Flask, request, jsonify
 import yfinance as yf
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)   # important for frontend connection
 
 @app.route('/stock', methods=['GET'])
 def get_stock():
     symbol = request.args.get('symbol')
 
+    if not symbol:
+        return jsonify({"error": "Please enter stock symbol"})
+
     try:
-        data = yf.Ticker(symbol)
-        hist = data.history(period='1d')
+        stock = yf.Ticker(symbol + ".NS")  # NSE fix
+        hist = stock.history(period='1d')
 
         if hist.empty:
             return jsonify({"error": "Invalid stock symbol"})
 
-        price = hist['Close'][0]
+        price = hist['Close'].iloc[-1]
 
-        # Simple AI suggestion
+        # Simple AI logic
         if price > 1000:
-            suggestion = "Stock price is high. Invest carefully."
+            suggestion = "Stock is expensive. Analyze before investing."
         else:
-            suggestion = "Stock price is moderate. You can consider buying."
+            suggestion = "Stock looks affordable. Consider buying."
 
         return jsonify({
-            "symbol": symbol,
-            "price": float(price),
+            "symbol": symbol.upper(),
+            "price": round(float(price), 2),
             "suggestion": suggestion
         })
 
-    except:
-        return jsonify({"error": "Error fetching data"})
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)

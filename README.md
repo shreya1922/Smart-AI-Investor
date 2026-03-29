@@ -1,22 +1,22 @@
 # Smart AI Investor
 
-## Problem
-Retail investors often invest without proper knowledge and data.
+## 📌 Problem
+Retail investors in India often invest without proper data and rely on guesswork.
 
-## Solution
-Smart AI Investor analyzes stock data and gives simple suggestions.
+## 💡 Solution
+Smart AI Investor is an AI-based system that analyzes stock data and provides simple, actionable investment suggestions.
 
-## Features
+## 🚀 Features
 - Stock price checker
-- AI-based suggestion
-- Simple UI
+- AI-based suggestion system
+- Easy-to-use interface
 
-## Tech Stack
-- Frontend: HTML, JS
-- Backend: Flask
+## 🛠️ Tech Stack
+- Frontend: HTML, JavaScript
+- Backend: Flask (Python)
 - API: Yahoo Finance
 
-## How to Run
+## ▶️ How to Run
 
 1. Install dependencies:
 pip install -r requirements.txt
@@ -24,7 +24,12 @@ pip install -r requirements.txt
 2. Run backend:
 python backend/app.py
 
-3. Open frontend/index.html
+3. Open frontend/index.html in browser
 
-## Demo
+## 🎥 Demo Video
 (Add your video link here)
+
+## 📊 Future Scope
+- AI chatbot for stock queries
+- Portfolio analysis
+- Advanced chart pattern detections
